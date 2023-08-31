@@ -14,4 +14,12 @@ def imprimir_grades():
             print(horario)
         print()
 
+# Verifica se há choque de horário em outras turmas
+def ha_choque(horario, dia, aula, turmas):
+    for turma in turmas:
+        if turma[horario][dia] == aula:
+            return True
+
+    return False
+
 imprimir_grades()
