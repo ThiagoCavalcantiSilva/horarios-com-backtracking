@@ -31,4 +31,31 @@ def aula_repetida(dia, aula, turma):
     '''
     return turma[0][dia] == aula
 
+def preencher_turma(turma, horario, dia):
+    if horario >= 2:  # Todos os horários foram preenchidos
+        horario = 0
+        dia += 1
+
+    if dia >= 5:  # Todos os dias foram preenchidos
+        return True
+
+    for aula in aulas_disponiveis:
+        if not ha_choque(horario, dia, aula, turmas) and not aula_repetida(dia, aula, turma):
+            turma[horario][dia] = aula
+            aulas_disponiveis.remove(aula)
+            if preencher_turma(turma, horario + 1, dia):
+                return True
+            
+            # Backtrack
+            turma[horario][dia] = ""
+            aulas_disponiveis.append(aula)
+
+    return False
+
+# Preenchendo turma_b e turma_c
+aulas_disponiveis = aulas.copy() # Estrutura usada para manter controlar aulas inseridas
+preencher_turma(turma_b, 0, 0)
+aulas_disponiveis = aulas.copy() # Estrutura usada para manter controlar aulas inseridas
+preencher_turma(turma_c, 0, 0)
+
 imprimir_grades()
