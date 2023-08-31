@@ -22,4 +22,13 @@ def ha_choque(horario, dia, aula, turmas):
 
     return False
 
+# Verifica se a disciplina tem duas aulas no mesmo dia e na mesma turma
+def aula_repetida(dia, aula, turma):
+    ''' 
+    Basta verificar se a aula é igual ao primeiro horário.
+    Pois, nas novas turmas, a primeira iteração comparará a aula com string vazia.
+    E na segunda, compara duas aulas preenchidas
+    '''
+    return turma[0][dia] == aula
+
 imprimir_grades()
